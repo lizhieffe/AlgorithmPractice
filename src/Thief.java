@@ -40,7 +40,7 @@ public class Thief {
 	}
 	
 	public static void main(String[] args) {
-		int[] values = {1, 3, 1};
+		int[] values = {1, 3, 1, 1};
 		Thief service = new Thief();
 		int result = service.maxStole(values);
 		System.out.println(result);
