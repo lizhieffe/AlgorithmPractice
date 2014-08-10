@@ -22,3 +22,4 @@
 .metadata/.lock
 
 .metadata/.log
+/bin

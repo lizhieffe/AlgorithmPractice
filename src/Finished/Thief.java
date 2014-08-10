@@ -1,3 +1,4 @@
+package Finished;
 /*
  * Given an array of houses with properties of different value, generate the max value a thief can stole.
  * Note: if the thief stole the house at i, he cannot stole the neighboring houses (i - 1, i + 1)
