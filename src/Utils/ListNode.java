@@ -3,9 +3,13 @@ package Utils;
 public class ListNode {
 	public int val;
 	public ListNode next;
+	public ListNode jump;
+	private static int count = 0;
+	private int id;
 	public ListNode(int x) {
 		val = x;
 		next = null;
+		id = count++;
 	}
 	
 	public static ListNode asList(int[] list) {
@@ -23,5 +27,28 @@ public class ListNode {
 		}
 		
 		return head;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("id = " + id);
+		sb.append(", val = " + val);
+		if (next == null)
+			sb.append(", next val = " + "NULL");
+		else
+			sb.append(", next val = " + next.val);
+
+		if (jump == null)
+			sb.append(", jump val = " + "NULL");
+		else
+			sb.append(", jump val = " + jump.val);		
+		return sb.toString();
+	}
+	
+	public void printList() {
+		System.out.println(this.toString());
+		if (next != null)
+			next.printList();
 	}
 }
