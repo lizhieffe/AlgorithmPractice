@@ -2,6 +2,11 @@ package Finished;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 public class FindInversePairs {
@@ -9,8 +14,8 @@ public class FindInversePairs {
 	 * brutal force
 	 * o(n^2)
 	 */
-	public static int find1(int[] ar) {
-		int result = 0;
+	public static long find1(int[] ar) {
+		long result = 0;
 		if (ar == null || ar.length <= 1)
 			return result;
 		for (int i = 0; i < ar.length - 1; ++i)
@@ -24,13 +29,13 @@ public class FindInversePairs {
 	 * merge sort
 	 * o(nlog(n)) 
 	 */
-	public static int find2(int[] ar) {
+	public static long find2(int[] ar) {
 		if (ar == null || ar.length < 2)
 			return 0;
 		return sort(ar, 0, ar.length - 1);
 	}
 	
-	private static int sort(int[] ar, int beg, int end) {
+	private static long sort(int[] ar, int beg, int end) {
 		if (end == beg)
 			return 0;
 		if (end - beg == 1) {
@@ -41,7 +46,7 @@ public class FindInversePairs {
 			else
 				return 0;
 		}
-		int result = 0;
+		long result = 0;
 		int mid = beg + (end - beg) / 2;
 		result += sort(ar, beg, mid);
 		result += sort(ar, mid + 1, end);
@@ -49,9 +54,9 @@ public class FindInversePairs {
 		return result;
 	}
 	
-	private static int merge(int[] ar, int beg, int mid, int end) {
+	private static long merge(int[] ar, int beg, int mid, int end) {
 		int[] tmp = new int[end - beg + 1];
-		int result = 0;
+		long result = 0;
 		int index1 = beg;
 		int index2 = mid + 1;
 		for (int i = 0; i < tmp.length; ++i) {
@@ -94,5 +99,28 @@ public class FindInversePairs {
 		assertTrue(find1(ar) == 14);
 		assertTrue(find2(ar) == 14);
 
+	}
+	
+	public static void main(String[] args) {
+		BufferedReader br;
+		List<Integer> list = new ArrayList<Integer>();
+		try {
+			br = new BufferedReader(new FileReader(
+					"/Users/zhili/Development/CourseraAlgorithm/src/Finished/IntegerArray.txt"));
+			String line;
+			while ((line = br.readLine()) != null) {
+			   list.add(Integer.parseInt(line));
+			}
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		int[] array = new int[list.size()];
+		for (int i = 0; i < list.size(); ++i)
+			array[i] = list.get(i);
+//		Arrays.sort(array);
+		long result = find2(array);
+		System.out.println(result);
 	}
 }
